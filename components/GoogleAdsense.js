@@ -42,10 +42,7 @@ function getNodesWithAdsByGoogleClass(node) {
 
   // 检查节点及其子节点是否包含 adsbygoogle 类
   function checkNodeForAds(node) {
-    if (
-      node.nodeType === Node.ELEMENT_NODE &&
-      node.classList.contains('adsbygoogle')
-    ) {
+    if (node.tagName === 'INS' && node.classList.contains('adsbygoogle')) {
       adsNodes.push(node)
     } else {
       // 递归检查子节点
@@ -63,7 +60,7 @@ function getNodesWithAdsByGoogleClass(node) {
  * 初始化谷歌广告
  * @returns
  */
-export const initGoogleAdsense = async ADSENSE_GOOGLE_ID => {
+export const initGoogleAdsense = ADSENSE_GOOGLE_ID => {
   console.log('Load Adsense')
   loadExternalResource(
     `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_GOOGLE_ID}`,
@@ -71,7 +68,7 @@ export const initGoogleAdsense = async ADSENSE_GOOGLE_ID => {
   ).then(url => {
     setTimeout(() => {
       // 页面加载完成后加载一次广告
-      const ads = document.getElementsByClassName('adsbygoogle')
+      const ads = document.querySelectorAll('ins.adsbygoogle')
       if (window.adsbygoogle && ads.length > 0) {
         requestAd(Array.from(ads))
       }
@@ -99,7 +96,11 @@ export const initGoogleAdsense = async ADSENSE_GOOGLE_ID => {
       }
 
       // 启动 MutationObserver
-      observer.observe(document.body, observerConfig)
+      observer.observe(
+        document.querySelector('#article-wrapper #notion-article') ||
+          document.body,
+        observerConfig
+      )
     }, 100)
   })
 }
@@ -113,6 +114,12 @@ export const initGoogleAdsense = async ADSENSE_GOOGLE_ID => {
 const AdSlot = ({ type = 'show' }) => {
   const ADSENSE_GOOGLE_ID = siteConfig('ADSENSE_GOOGLE_ID')
   const ADSENSE_GOOGLE_TEST = siteConfig('ADSENSE_GOOGLE_TEST')
+  // ponytail: coarse ad slots; tune per slot if fill sizes differ.
+  const reservedAdStyle = {
+    display: 'block',
+    textAlign: 'center',
+    minHeight: type === 'flow' || type === 'native' ? '180px' : '90px'
+  }
   if (!ADSENSE_GOOGLE_ID) {
     return null
   }
@@ -121,7 +128,7 @@ const AdSlot = ({ type = 'show' }) => {
     return (
       <ins
         className='adsbygoogle'
-        style={{ display: 'block', textAlign: 'center' }}
+        style={reservedAdStyle}
         data-ad-layout='in-article'
         data-ad-format='fluid'
         data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
@@ -137,7 +144,7 @@ const AdSlot = ({ type = 'show' }) => {
         className='adsbygoogle'
         data-ad-format='fluid'
         data-ad-layout-key='-5j+cz+30-f7+bf'
-        style={{ display: 'block' }}
+        style={reservedAdStyle}
         data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
         data-ad-client={ADSENSE_GOOGLE_ID}
         data-ad-slot={siteConfig('ADSENSE_GOOGLE_SLOT_FLOW')}></ins>
@@ -149,7 +156,7 @@ const AdSlot = ({ type = 'show' }) => {
     return (
       <ins
         className='adsbygoogle'
-        style={{ display: 'block', textAlign: 'center' }}
+        style={reservedAdStyle}
         data-ad-format='autorelaxed'
         data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
         data-ad-client={ADSENSE_GOOGLE_ID}
@@ -161,7 +168,7 @@ const AdSlot = ({ type = 'show' }) => {
   return (
     <ins
       className='adsbygoogle'
-      style={{ display: 'block' }}
+      style={reservedAdStyle}
       data-ad-client={ADSENSE_GOOGLE_ID}
       data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
       data-ad-slot={siteConfig('ADSENSE_GOOGLE_SLOT_AUTO')}
@@ -182,12 +189,13 @@ const AdEmbed = () => {
   useEffect(() => {
     setTimeout(() => {
       // 找到所有 class 为 notion-text 且内容为 '<ins/>' 的 div 元素
-      const notionTextElements = document.querySelectorAll('div.notion-text')
-
+      const notionTextElements = document.querySelectorAll(
+        '#article-wrapper #notion-article div.notion-text'
+      )
       // 遍历找到的元素
       notionTextElements?.forEach(element => {
         // 检查元素的内容是否为 '<ins/>'
-        if (element.innerHTML.trim() === '&lt;ins/&gt;') {
+        if (element.textContent.trim() === '<ins/>') {
           // 创建新的 <ins> 元素
           const newInsElement = document.createElement('ins')
           newInsElement.className = 'adsbygoogle w-full py-1'
@@ -205,8 +213,6 @@ const AdEmbed = () => {
           element?.parentNode?.replaceChild(newInsElement, element)
         }
       })
-
-      requestAd()
     }, 1000)
   }, [])
   return <></>
