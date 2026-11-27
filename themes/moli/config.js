@@ -1,4 +1,6 @@
 const CONFIG = {
+  MOLI_BANGUMI_USER: '', // 追番页：Bangumi 番组计划（bgm.tv）的用户名或数字 id，收藏要是公开的
+
   HEO_HOME_POST_TWO_COLS: true, // 首页博客两列显示，若为false则只显示一列
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
 
