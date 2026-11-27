@@ -12,11 +12,13 @@ const EssayBar = () => {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    const buildId = window.__NEXT_DATA__?.buildId
+    // 站点开了多语言时，数据地址里要带上语言，例如 /_next/data/<id>/zh-CN/essay.json
+    const { buildId, locale } = window.__NEXT_DATA__ || {}
     if (!buildId) return
+    const localePath = locale ? `${locale}/` : ''
     let cancelled = false
     const load = () => {
-      fetch(`/_next/data/${buildId}/${ESSAY_SLUG}.json`)
+      fetch(`/_next/data/${buildId}/${localePath}${ESSAY_SLUG}.json`)
         .then(res => (res.ok ? res.json() : null))
         .then(data => {
           if (cancelled || !data?.pageProps?.post) return
