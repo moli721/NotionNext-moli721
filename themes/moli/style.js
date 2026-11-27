@@ -304,6 +304,213 @@ const Style = () => {
         #theme-heo .moli-banner-image { transition: none; }
       }
 
+
+      /* —— MOLI：关于页、追番页、音乐馆 —— */
+      #theme-heo .moli-tab {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 1rem;
+        border-radius: 999px;
+        border: 1px solid #e3e8f7;
+        background: var(--heo-color-card);
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      }
+      .dark #theme-heo .moli-tab { background: var(--heo-color-card-dark); border-color: #3d3d3f; }
+      #theme-heo .moli-tab:hover { border-color: var(--heo-color-primary); }
+      #theme-heo .moli-tab.is-active {
+        background: var(--heo-color-primary);
+        border-color: var(--heo-color-primary);
+        color: #fff;
+      }
+      .dark #theme-heo .moli-tab.is-active { background: var(--heo-color-accent); border-color: var(--heo-color-accent); }
+      #theme-heo .moli-tab.is-light {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #fff;
+      }
+      #theme-heo .moli-tab.is-light.is-active { background: #fff; color: #111; }
+
+      #theme-heo .moli-bangumi-cover {
+        position: relative;
+        aspect-ratio: 2 / 3;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        background: var(--heo-color-card-muted);
+        box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.3);
+      }
+      .dark #theme-heo .moli-bangumi-cover { background: #2c2c2e; }
+      #theme-heo .moli-bangumi-card:hover .moli-bangumi-cover { box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4); }
+      #theme-heo .moli-bangumi-score {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.1rem 0.45rem;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.55);
+        color: #ffd166;
+        font-size: 0.75rem;
+        font-weight: 700;
+        backdrop-filter: blur(4px);
+      }
+
+      #theme-heo .moli-music-stage {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        background: #1d1f2b;
+        color: #fff;
+      }
+      #theme-heo .moli-music-bg {
+        position: absolute;
+        inset: -60px;
+        background-size: cover;
+        background-position: center;
+        filter: blur(50px) brightness(0.5) saturate(1.3);
+        transform: scale(1.1);
+        transition: background-image 0.8s;
+      }
+      #theme-heo .moli-music-cover {
+        width: 15rem;
+        height: 15rem;
+        border-radius: 1.25rem;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.6);
+      }
+      #theme-heo .moli-music-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        transition: background-color 0.3s, transform 0.2s;
+      }
+      #theme-heo .moli-music-button:hover { background: rgba(255, 255, 255, 0.28); }
+      #theme-heo .moli-music-button:active { transform: scale(0.94); }
+      #theme-heo .moli-music-button.is-main {
+        width: 3.5rem;
+        height: 3.5rem;
+        background: #fff;
+        color: #111;
+        font-size: 1.15rem;
+      }
+      #theme-heo .moli-lyrics {
+        position: relative;
+        max-height: 26rem;
+        overflow-y: auto;
+        scrollbar-width: none;
+        padding: 8rem 0;
+        text-align: center;
+        mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent);
+        -webkit-mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent);
+      }
+      #theme-heo .moli-lyrics::-webkit-scrollbar { display: none; }
+      #theme-heo .moli-lyrics p {
+        margin: 0.9rem 0;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        opacity: 0.45;
+        transition: opacity 0.4s, transform 0.4s;
+      }
+      #theme-heo .moli-lyrics p.is-active {
+        opacity: 1;
+        font-weight: 700;
+        transform: scale(1.18);
+      }
+      @media (min-width: 768px) {
+        #theme-heo .moli-lyrics { text-align: left; }
+        #theme-heo .moli-lyrics p { transform-origin: left center; }
+      }
+      #theme-heo .moli-music-stage .aplayer {
+        margin: 0;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: none;
+        color: #fff;
+      }
+      #theme-heo .moli-music-stage .aplayer .aplayer-pic { display: none; }
+      #theme-heo .moli-music-stage .aplayer .aplayer-info { margin-left: 0; border-bottom: 0; padding-left: 14px; }
+      #theme-heo .moli-music-stage .aplayer .aplayer-info .aplayer-music .aplayer-title { color: #fff; }
+      #theme-heo .moli-music-stage .aplayer .aplayer-info .aplayer-music .aplayer-author { color: rgba(255, 255, 255, 0.65); }
+      #theme-heo .moli-music-stage .aplayer .aplayer-lrc { display: none; }
+      #theme-heo .moli-music-stage .aplayer .aplayer-list ol { scrollbar-width: thin; }
+      #theme-heo .moli-music-stage .aplayer .aplayer-list ol li {
+        border-top-color: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.85);
+      }
+      #theme-heo .moli-music-stage .aplayer .aplayer-list ol li:hover,
+      #theme-heo .moli-music-stage .aplayer .aplayer-list ol li.aplayer-list-light { background: rgba(255, 255, 255, 0.12); }
+      #theme-heo .moli-music-stage .aplayer .aplayer-list ol li .aplayer-list-author,
+      #theme-heo .moli-music-stage .aplayer .aplayer-list ol li .aplayer-list-index { color: rgba(255, 255, 255, 0.5); }
+      #theme-heo .moli-music-stage .aplayer .aplayer-icon path { fill: rgba(255, 255, 255, 0.8); }
+      #theme-heo .moli-music-stage .aplayer .aplayer-info .aplayer-controller .aplayer-time { color: rgba(255, 255, 255, 0.7); }
+
+      #theme-heo .moli-about-avatar {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 999px;
+        padding: 4px;
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.45);
+      }
+      #theme-heo .moli-about-tag {
+        padding: 0.3rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+      #theme-heo .moli-about-social {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.16);
+        transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      }
+      #theme-heo .moli-about-social:hover {
+        background: #fff;
+        color: var(--heo-color-primary);
+        transform: translateY(-2px);
+      }
+      #theme-heo .moli-skill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.25rem 0.85rem 0.25rem 0.25rem;
+        border-radius: 999px;
+        background: var(--heo-color-card-muted);
+      }
+      .dark #theme-heo .moli-skill { background: #2c2c2e; }
+      #theme-heo .moli-skill-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 999px;
+      }
+      #theme-heo .moli-skill-icon img { width: 1.15rem; height: 1.15rem; }
+      #theme-heo .moli-more-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 0.25rem;
+        border-bottom: 1px dashed #e3e8f7;
+        transition: color 0.3s;
+      }
+      .dark #theme-heo .moli-more-link { border-color: #3d3d3f; }
+      #theme-heo .moli-more-link:last-child { border-bottom: 0; }
+      #theme-heo .moli-more-link:hover { color: var(--heo-color-primary); }
+      .dark #theme-heo .moli-more-link:hover { color: var(--heo-color-accent); }
+
       body {
         background-color: var(--heo-color-bg, ${bgColor});
       }
