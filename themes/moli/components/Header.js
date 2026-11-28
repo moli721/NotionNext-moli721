@@ -88,10 +88,11 @@ const Header = props => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY
+          // 只看真实位移：GLOBAL_JS 会补发 scroll 事件，位置没变时不能当成向上滚
           if (currentScrollY > prevScrollY) {
-            setActiveIndex(1) // 向下滚动时设置activeIndex为1
-          } else {
-            setActiveIndex(0) // 向上滚动时设置activeIndex为0
+            setActiveIndex(1) // 向下滚动时显示页面标题
+          } else if (currentScrollY < prevScrollY) {
+            setActiveIndex(0) // 向上滚动时显示菜单
           }
           prevScrollY = currentScrollY
           ticking = false
