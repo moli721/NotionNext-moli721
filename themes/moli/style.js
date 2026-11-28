@@ -240,9 +240,284 @@ const Style = () => {
         border-radius: 0.75rem !important;
       }
 
-      #theme-heo .moli-equipment-cover {
-        height: 200px;
-        background: #f4f5f7;
+      /* 装备页：左边分类，右边方形卡片墙；产品图是透明背景，完整放在卡片中间 */
+      #theme-heo .moli-shelf {
+        display: grid;
+        grid-template-columns: 12rem minmax(0, 1fr);
+        gap: 3rem;
+        padding-top: 1.5rem;
+      }
+      #theme-heo .moli-shelf-side {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        display: grid;
+        gap: 1.5rem;
+      }
+      #theme-heo .moli-shelf-heading h1 {
+        font-size: 1.75rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+      #theme-heo .moli-shelf-heading p {
+        margin-top: 0.35rem;
+        font-size: 0.875rem;
+        color: var(--heo-color-text-secondary);
+        opacity: 0.8;
+      }
+      #theme-heo .moli-shelf-cats {
+        display: grid;
+        gap: 0.125rem;
+      }
+      #theme-heo .moli-shelf-cats button {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.625rem;
+        font-size: 0.9375rem;
+        color: var(--heo-color-text-secondary);
+        text-align: left;
+        transition: background-color 0.2s, color 0.2s;
+      }
+      #theme-heo .moli-shelf-cats button:hover { color: var(--heo-color-text); }
+      #theme-heo .moli-shelf-cats button[aria-selected='true'] {
+        background: var(--heo-color-card);
+        color: var(--heo-color-text);
+        font-weight: 600;
+        box-shadow: 0 1px 3px rgba(44, 45, 48, 0.08);
+      }
+      .dark #theme-heo .moli-shelf-cats button[aria-selected='true'] {
+        background: var(--heo-color-card-dark);
+        box-shadow: none;
+      }
+      #theme-heo .moli-shelf-cat-count {
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        opacity: 0.6;
+      }
+
+      #theme-heo .moli-shelf-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem 1.25rem;
+      }
+      #theme-heo .moli-shelf-card {
+        display: grid;
+        align-content: start;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+      }
+      #theme-heo .moli-shelf-tile {
+        position: relative;
+        display: block;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 0.875rem;
+        border-radius: 1.25rem;
+        background: var(--heo-color-card);
+        box-shadow: 0 0 0 1px rgba(44, 45, 48, 0.04), 0 6px 16px -8px rgba(44, 45, 48, 0.12);
+        transition: box-shadow 0.3s, transform 0.3s;
+      }
+      .dark #theme-heo .moli-shelf-tile {
+        background: var(--heo-color-card-dark);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+      #theme-heo .moli-shelf-tile img {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 72%;
+        height: 72%;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 12px rgba(30, 35, 60, 0.12));
+        transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .dark #theme-heo .moli-shelf-tile img { filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45)); }
+      #theme-heo .moli-shelf-card:hover .moli-shelf-tile {
+        transform: translateY(-3px);
+        box-shadow: 0 0 0 1px rgba(44, 45, 48, 0.04), 0 18px 32px -16px rgba(44, 45, 48, 0.25);
+      }
+      #theme-heo .moli-shelf-card:hover .moli-shelf-tile img { transform: scale(1.04); }
+      #theme-heo .moli-shelf-name {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      #theme-heo .moli-shelf-spec {
+        margin-top: 0.125rem;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--heo-color-text-secondary);
+        opacity: 0.8;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      #theme-heo .moli-shelf-enter { animation: moli-shelf-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+      @keyframes moli-shelf-in {
+        from { opacity: 0.2; transform: translateY(10px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      @media (min-width: 1280px) {
+        #theme-heo .moli-shelf-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      }
+      @media (max-width: 1023px) {
+        #theme-heo .moli-shelf { grid-template-columns: 10rem minmax(0, 1fr); gap: 2rem; }
+        #theme-heo .moli-shelf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 767px) {
+        #theme-heo .moli-shelf { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding-top: 0.5rem; }
+        #theme-heo .moli-shelf-side { position: static; gap: 1rem; }
+        #theme-heo .moli-shelf-heading { display: flex; align-items: baseline; gap: 0.75rem; }
+        #theme-heo .moli-shelf-heading p { margin-top: 0; }
+        #theme-heo .moli-shelf-cats {
+          display: flex;
+          gap: 0.375rem;
+          overflow-x: auto;
+          scrollbar-width: none;
+          margin-inline: -1.25rem;
+          padding-inline: 1.25rem;
+        }
+        #theme-heo .moli-shelf-cats::-webkit-scrollbar { display: none; }
+        #theme-heo .moli-shelf-cats button {
+          width: auto;
+          flex: none;
+          padding: 0.4rem 0.9rem;
+          border-radius: 999px;
+          white-space: nowrap;
+        }
+        #theme-heo .moli-shelf-grid { gap: 1.5rem 0.75rem; }
+        #theme-heo .moli-shelf-tile { border-radius: 1rem; margin-bottom: 0.625rem; }
+      }
+
+      /* 装备详情弹窗 */
+      #theme-heo .moli-shelf-dialog {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        padding: 1rem;
+      }
+      #theme-heo .moli-shelf-scrim {
+        position: absolute;
+        inset: 0;
+        background: rgba(12, 14, 24, 0.45);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        animation: moli-fade-in 0.2s both;
+      }
+      #theme-heo .moli-shelf-panel {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        width: min(52rem, 100%);
+        max-height: 100%;
+        overflow: auto;
+        border-radius: 1.5rem;
+        background: var(--heo-color-card);
+        color: var(--heo-color-text);
+        box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.5);
+        animation: moli-shelf-pop 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+      }
+      .dark #theme-heo .moli-shelf-panel { background: var(--heo-color-card-dark); }
+      #theme-heo .moli-shelf-panel-media {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        background: var(--heo-color-card-muted);
+      }
+      .dark #theme-heo .moli-shelf-panel-media { background: #2a2a2d; }
+      #theme-heo .moli-shelf-panel-media img {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 74%;
+        height: 74%;
+        object-fit: contain;
+        filter: drop-shadow(0 16px 18px rgba(30, 35, 60, 0.16));
+      }
+      #theme-heo .moli-shelf-panel-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.875rem;
+        min-width: 0;
+        padding: 2.25rem 2rem;
+      }
+      #theme-heo .moli-shelf-panel-cat {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--heo-color-primary);
+      }
+      .dark #theme-heo .moli-shelf-panel-cat { color: var(--heo-color-accent); }
+      #theme-heo .moli-shelf-panel-body h2 {
+        font-size: 1.75rem;
+        font-weight: 800;
+        line-height: 1.25;
+      }
+      #theme-heo .moli-shelf-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      #theme-heo .moli-shelf-chips li {
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.8125rem;
+        background: color-mix(in srgb, var(--heo-color-primary) 10%, transparent);
+        color: var(--heo-color-primary);
+      }
+      .dark #theme-heo .moli-shelf-chips li {
+        background: color-mix(in srgb, var(--heo-color-accent) 16%, transparent);
+        color: var(--heo-color-accent);
+      }
+      #theme-heo .moli-shelf-desc {
+        font-size: 0.9375rem;
+        line-height: 1.85;
+        color: var(--heo-color-text-secondary);
+      }
+      #theme-heo .moli-shelf-close {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        display: grid;
+        place-items: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 999px;
+        color: var(--heo-color-text-secondary);
+        transition: background-color 0.2s;
+      }
+      #theme-heo .moli-shelf-close:hover { background: var(--heo-color-card-muted); }
+      .dark #theme-heo .moli-shelf-close:hover { background: #2c2c2e; }
+      @keyframes moli-shelf-pop {
+        from { opacity: 0.4; transform: translateY(14px) scale(0.98); }
+        to { opacity: 1; transform: none; }
+      }
+      @keyframes moli-fade-in { from { opacity: 0; } to { opacity: 1; } }
+      @media (max-width: 640px) {
+        #theme-heo .moli-shelf-dialog { place-items: end stretch; padding: 0; }
+        #theme-heo .moli-shelf-panel {
+          grid-template-columns: minmax(0, 1fr);
+          width: 100%;
+          max-height: 92%;
+          border-radius: 1.5rem 1.5rem 0 0;
+          padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        #theme-heo .moli-shelf-panel-media { aspect-ratio: 4 / 3; }
+        #theme-heo .moli-shelf-panel-body { padding: 1.5rem 1.25rem 2rem; }
+        #theme-heo .moli-shelf-panel-body h2 { font-size: 1.5rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #theme-heo .moli-shelf-enter,
+        #theme-heo .moli-shelf-panel,
+        #theme-heo .moli-shelf-scrim { animation: none; }
+        #theme-heo .moli-shelf-tile,
+        #theme-heo .moli-shelf-tile img { transition: none; }
       }
 
       #theme-heo .moli-link-card {
