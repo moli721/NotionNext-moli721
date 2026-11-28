@@ -265,37 +265,30 @@ const Style = () => {
         color: var(--heo-color-text-secondary);
         opacity: 0.8;
       }
-      #theme-heo .moli-shelf-cats {
+      #theme-heo .moli-shelf-options {
         display: grid;
+        justify-items: start;
         gap: 0.125rem;
       }
-      #theme-heo .moli-shelf-cats button {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 0.75rem;
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.625rem;
+      #theme-heo .moli-shelf-options button {
+        padding: 0.25rem 0;
         font-size: 0.9375rem;
         color: var(--heo-color-text-secondary);
+        opacity: 0.75;
         text-align: left;
-        transition: background-color 0.2s, color 0.2s;
+        transition: color 0.2s, opacity 0.2s;
       }
-      #theme-heo .moli-shelf-cats button:hover { color: var(--heo-color-text); }
-      #theme-heo .moli-shelf-cats button[aria-selected='true'] {
-        background: var(--heo-color-card);
+      #theme-heo .moli-shelf-options button:hover { opacity: 1; }
+      #theme-heo .moli-shelf-options button[aria-selected='true'],
+      #theme-heo .moli-shelf-options button[aria-checked='true'] {
         color: var(--heo-color-text);
         font-weight: 600;
-        box-shadow: 0 1px 3px rgba(44, 45, 48, 0.08);
+        opacity: 1;
       }
-      .dark #theme-heo .moli-shelf-cats button[aria-selected='true'] {
-        background: var(--heo-color-card-dark);
-        box-shadow: none;
-      }
-      #theme-heo .moli-shelf-cat-count {
-        font-size: 0.75rem;
-        font-variant-numeric: tabular-nums;
+      #theme-heo .moli-shelf-sort { display: grid; gap: 0.5rem; }
+      #theme-heo .moli-shelf-label {
+        font-size: 0.8125rem;
+        color: var(--heo-color-text-secondary);
         opacity: 0.6;
       }
 
@@ -341,20 +334,31 @@ const Style = () => {
         box-shadow: 0 0 0 1px rgba(44, 45, 48, 0.04), 0 18px 32px -16px rgba(44, 45, 48, 0.25);
       }
       #theme-heo .moli-shelf-card:hover .moli-shelf-tile img { transform: scale(1.04); }
-      #theme-heo .moli-shelf-name {
-        font-size: 0.9375rem;
+      #theme-heo .moli-shelf-brand {
+        font-size: 0.875rem;
         font-weight: 600;
-        line-height: 1.4;
+        line-height: 1.5;
       }
-      #theme-heo .moli-shelf-spec {
-        margin-top: 0.125rem;
+      #theme-heo .moli-shelf-line {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+        min-width: 0;
         font-size: 0.8125rem;
         line-height: 1.5;
         color: var(--heo-color-text-secondary);
         opacity: 0.8;
+      }
+      #theme-heo .moli-shelf-name {
+        min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+      #theme-heo .moli-shelf-price {
+        flex: none;
+        font-variant-numeric: tabular-nums;
       }
       #theme-heo .moli-shelf-enter { animation: moli-shelf-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
       @keyframes moli-shelf-in {
@@ -374,22 +378,17 @@ const Style = () => {
         #theme-heo .moli-shelf-side { position: static; gap: 1rem; }
         #theme-heo .moli-shelf-heading { display: flex; align-items: baseline; gap: 0.75rem; }
         #theme-heo .moli-shelf-heading p { margin-top: 0; }
-        #theme-heo .moli-shelf-cats {
+        #theme-heo .moli-shelf-options {
           display: flex;
-          gap: 0.375rem;
+          gap: 1.25rem;
           overflow-x: auto;
           scrollbar-width: none;
           margin-inline: -1.25rem;
           padding-inline: 1.25rem;
         }
-        #theme-heo .moli-shelf-cats::-webkit-scrollbar { display: none; }
-        #theme-heo .moli-shelf-cats button {
-          width: auto;
-          flex: none;
-          padding: 0.4rem 0.9rem;
-          border-radius: 999px;
-          white-space: nowrap;
-        }
+        #theme-heo .moli-shelf-options::-webkit-scrollbar { display: none; }
+        #theme-heo .moli-shelf-options button { flex: none; white-space: nowrap; }
+        #theme-heo .moli-shelf-sort { display: none; }
         #theme-heo .moli-shelf-grid { gap: 1.5rem 0.75rem; }
         #theme-heo .moli-shelf-tile { border-radius: 1rem; margin-bottom: 0.625rem; }
       }
@@ -448,12 +447,19 @@ const Style = () => {
         min-width: 0;
         padding: 2.25rem 2rem;
       }
-      #theme-heo .moli-shelf-panel-cat {
-        font-size: 0.8125rem;
+      #theme-heo .moli-shelf-panel-brand {
+        font-size: 0.875rem;
         font-weight: 600;
+        color: var(--heo-color-text-secondary);
+      }
+      #theme-heo .moli-shelf-panel-price {
+        margin-top: -0.25rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
         color: var(--heo-color-primary);
       }
-      .dark #theme-heo .moli-shelf-panel-cat { color: var(--heo-color-accent); }
+      .dark #theme-heo .moli-shelf-panel-price { color: var(--heo-color-accent); }
       #theme-heo .moli-shelf-panel-body h2 {
         font-size: 1.75rem;
         font-weight: 800;
