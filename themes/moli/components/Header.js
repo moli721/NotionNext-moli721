@@ -88,10 +88,11 @@ const Header = props => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY
+          // 只看真实位移：GLOBAL_JS 会补发 scroll 事件，位置没变时不能当成向上滚
           if (currentScrollY > prevScrollY) {
-            setActiveIndex(1) // 向下滚动时设置activeIndex为1
-          } else {
-            setActiveIndex(0) // 向上滚动时设置activeIndex为0
+            setActiveIndex(1) // 向下滚动时显示页面标题
+          } else if (currentScrollY < prevScrollY) {
+            setActiveIndex(0) // 向上滚动时显示菜单
           }
           prevScrollY = currentScrollY
           ticking = false
@@ -171,10 +172,20 @@ const Header = props => {
             </div>
             <div
               className={`absolute transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0' : '-mb-20 opacity-0 invisible'}`}>
-              <h1 className='font-bold text-center text-light-400 dark:text-gray-400'>
-                {siteConfig('AUTHOR') || siteConfig('TITLE')}{' '}
-                {siteConfig('BIO') && <>|</>} {siteConfig('BIO')}
-              </h1>
+              {/* 往下滚时显示当前页标题，鼠标移上去变成「回到顶部」按钮 */}
+              <button
+                type='button'
+                className='moli-totop'
+                title='回到顶部'
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <span className='moli-totop-title'>
+                  {props.post?.title ||
+                    `${siteConfig('AUTHOR') || siteConfig('TITLE')}${siteConfig('BIO') ? ` | ${siteConfig('BIO')}` : ''}`}
+                </span>
+                <span className='moli-totop-label' aria-hidden='true'>
+                  回到顶部
+                </span>
+              </button>
             </div>
           </div>
 

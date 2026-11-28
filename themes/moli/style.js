@@ -730,6 +730,43 @@ const Style = () => {
         #theme-heo .moli-info-avatar > img { animation: none; }
       }
 
+      /* 顶栏往下滚时的页面标题：鼠标移上去变成「回到顶部」胶囊按钮 */
+      #theme-heo .moli-totop {
+        position: relative;
+        display: block;
+        max-width: 36rem;
+        padding: 0.3rem 1.25rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      #theme-heo .moli-totop-title {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        opacity: 0.85;
+        transition: opacity 0.2s;
+      }
+      #theme-heo .moli-totop-label {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        letter-spacing: 0.1em;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      #theme-heo .moli-totop:hover,
+      #theme-heo .moli-totop:focus-visible { background: var(--heo-color-primary); }
+      .dark #theme-heo .moli-totop:hover,
+      .dark #theme-heo .moli-totop:focus-visible { background: var(--heo-color-accent); }
+      #theme-heo .moli-totop:hover .moli-totop-title,
+      #theme-heo .moli-totop:focus-visible .moli-totop-title { opacity: 0; }
+      #theme-heo .moli-totop:hover .moli-totop-label,
+      #theme-heo .moli-totop:focus-visible .moli-totop-label { opacity: 1; }
+
       /* 站点图标是圆的 */
       #theme-heo .moli-logo-icon { border-radius: 50%; object-fit: cover; }
 
