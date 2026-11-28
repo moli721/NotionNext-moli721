@@ -6,8 +6,6 @@ const CONFIG = {
 
   HEO_HOME_BANNER_ENABLE: true,
 
-  HEO_INFO_CARD_AVATAR_BLUR: true, // 文章详情页个人资料卡头像样式。true：显示为模糊装饰头像；false：与首页头像保持一致
-
   HEO_COLOR_PRIMARY: '#4f65f0',
   HEO_COLOR_PRIMARY_HOVER: '#4f46e5',
   HEO_COLOR_PRIMARY_TEXT: '#ffffff',
@@ -59,7 +57,7 @@ const CONFIG = {
   // 英雄区右侧推荐文章遮罩控制
   HEO_HERO_RECOMMEND_COVER_ENABLE: false, // 是否显示推荐文章遮罩图片，true显示遮罩需点击查看，false直接显示推荐文章
 
-  // 右侧个人资料卡牌欢迎语，点击可自动切换
+  // 右侧个人资料卡：第一句是顶部问候（点击切换），其余几句在鼠标移到卡片上时显示
   HEO_INFOCARD_GREETINGS: [
     '你好！我是',
     '🔍 分享与热心帮助',
@@ -70,14 +68,11 @@ const CONFIG = {
     '🧱 团队小组发动机'
   ],
 
-  // 个人资料底部按钮
+  // 个人资料卡：头像右下角的状态小图标（一个表情，或图片地址）；名字链接到 URL1；
+  // 右下角按钮依次是 GitHub（CONTACT_GITHUB，没有就用 URL2）、Bilibili（CONTACT_BILIBILI）、主页（URL3）
+  MOLI_INFO_CARD_STATUS: '☕',
   HEO_INFO_CARD_URL1: '/about',
-  HEO_INFO_CARD_ICON1: 'fas fa-user',
   HEO_INFO_CARD_URL2: 'https://github.com/tangly1024',
-  HEO_INFO_CARD_ICON2: 'fab fa-github',
-  HEO_INFO_CARD_ICON_ORCID: 'fab fa-orcid',
-  HEO_INFO_CARD_ICON_CSDN: 'fab fa-csdn',
-  HEO_INFO_CARD_ICON_JUEJIN: 'fab fa-juejin',
   HEO_INFO_CARD_URL3: 'https://www.tangly1024.com',
   HEO_INFO_CARD_TEXT3: '了解更多',
 
