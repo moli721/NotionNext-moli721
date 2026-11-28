@@ -586,6 +586,153 @@ const Style = () => {
       }
 
 
+      /* —— MOLI：侧边栏资料卡（流动渐变底、会转的圆头像，鼠标移上去换成自我介绍） —— */
+      #theme-heo .moli-info-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 20rem;
+        padding: 1rem 1.25rem 1.25rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        color: #fff;
+        background-image: linear-gradient(
+          135deg,
+          var(--heo-color-primary-hover),
+          var(--heo-color-primary),
+          #7a8cff,
+          var(--heo-color-primary-hover)
+        );
+        background-size: 300% 300%;
+        box-shadow: 0 8px 16px -4px rgba(44, 45, 48, 0.08);
+        animation: moli-info-flow 15s ease infinite;
+      }
+      .dark #theme-heo .moli-info-card {
+        background-image: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--heo-color-primary-hover) 45%, #000),
+          color-mix(in srgb, var(--heo-color-primary) 55%, #000),
+          color-mix(in srgb, #7a8cff 45%, #000),
+          color-mix(in srgb, var(--heo-color-primary-hover) 45%, #000)
+        );
+        box-shadow: none;
+      }
+      #theme-heo .moli-info-greeting {
+        padding: 0.2rem 0.65rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.18);
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        user-select: none;
+        transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      }
+      #theme-heo .moli-info-greeting:hover {
+        background: #fff;
+        color: var(--heo-color-primary-hover);
+        transform: scale(1.06);
+      }
+      .dark #theme-heo .moli-info-greeting:hover { color: #111; }
+      #theme-heo .moli-info-avatar {
+        position: relative;
+        width: 118px;
+        height: 118px;
+        margin: 2.5rem auto 2.75rem;
+        transform-origin: center bottom;
+        transition: transform 0.35s cubic-bezier(0.69, 0.39, 0, 1.21), opacity 0.3s;
+      }
+      #theme-heo .moli-info-avatar > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        background: #fff;
+        animation: moli-avatar-spin 6s linear infinite;
+      }
+      #theme-heo .moli-info-status {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        place-items: center;
+        width: 2.1rem;
+        height: 2.1rem;
+        border-radius: 50%;
+        background: #fff;
+        font-size: 1.1rem;
+        line-height: 1;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+      #theme-heo .moli-info-status img { width: 1.6rem; height: 1.6rem; }
+      #theme-heo .moli-info-intro {
+        position: absolute;
+        inset: 3rem 0 5.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0 1.25rem;
+        text-align: center;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.9);
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 0.3s, transform 0.3s;
+      }
+      #theme-heo .moli-info-card:hover .moli-info-avatar { opacity: 0; transform: scale(0); }
+      #theme-heo .moli-info-card:hover .moli-info-intro { opacity: 1; transform: none; }
+      #theme-heo .moli-info-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        width: 100%;
+        margin-top: auto;
+      }
+      #theme-heo .moli-info-name { display: grid; gap: 0.35rem; min-width: 0; color: #fff; }
+      #theme-heo .moli-info-name span { font-size: 1.375rem; font-weight: 800; line-height: 1.1; }
+      #theme-heo .moli-info-name small {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        opacity: 0.7;
+      }
+      #theme-heo .moli-info-links { display: flex; flex: none; gap: 0.5rem; }
+      #theme-heo .moli-info-links a {
+        display: grid;
+        place-items: center;
+        width: 2.375rem;
+        height: 2.375rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
+        transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      }
+      #theme-heo .moli-info-links a:hover {
+        background: #fff;
+        color: var(--heo-color-primary-hover);
+        transform: scale(1.1);
+      }
+      .dark #theme-heo .moli-info-links a:hover { color: #111; }
+      @keyframes moli-avatar-spin { to { transform: rotate(360deg); } }
+      @keyframes moli-info-flow {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #theme-heo .moli-info-card,
+        #theme-heo .moli-info-avatar > img { animation: none; }
+      }
+
+      /* 站点图标是圆的 */
+      #theme-heo .moli-logo-icon { border-radius: 50%; object-fit: cover; }
+
       /* —— MOLI：关于页、追番页、音乐馆 —— */
       #theme-heo .moli-tab {
         display: inline-flex;
