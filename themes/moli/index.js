@@ -135,7 +135,7 @@ const LayoutBase = props => {
       </main>
 
       {/* 页脚 */}
-      <Footer {...props} />
+      <Footer />
 
       {HEO_LOADING_COVER && <LoadingCover />}
     </div>
