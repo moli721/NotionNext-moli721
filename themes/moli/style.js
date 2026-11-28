@@ -730,6 +730,125 @@ const Style = () => {
         #theme-heo .moli-info-avatar > img { animation: none; }
       }
 
+      /* —— MOLI：页脚 —— */
+      #theme-heo .moli-footer {
+        display: grid;
+        justify-items: center;
+        gap: 1.5rem;
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 1.5rem 2.5rem;
+      }
+      #theme-heo .moli-footer-social {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.25rem;
+      }
+      #theme-heo .moli-footer-icon {
+        display: grid;
+        place-items: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 50%;
+        background: #3c3c43;
+        color: #fff;
+        font-size: 1.15rem;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      .dark #theme-heo .moli-footer-icon { background: #2c2c33; }
+      #theme-heo .moli-footer-icon:hover {
+        background: var(--heo-color-primary);
+        transform: translateY(-2px) scale(1.06);
+      }
+      .dark #theme-heo .moli-footer-icon:hover { background: var(--heo-color-accent); }
+      #theme-heo .moli-footer-avatar {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 0 3px var(--heo-color-card), 0 6px 16px -6px rgba(0, 0, 0, 0.35);
+        transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .dark #theme-heo .moli-footer-avatar { box-shadow: 0 0 0 3px #2c2c33; }
+      #theme-heo .moli-footer-avatar:hover { transform: rotate(360deg); }
+      #theme-heo .moli-footer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+      #theme-heo .moli-footer-runtime {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0 0.35rem;
+        font-size: 0.875rem;
+      }
+      #theme-heo .moli-footer-runtime b {
+        margin-right: 0.15rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: var(--heo-color-text);
+      }
+      #theme-heo .moli-footer-runtime i {
+        align-self: center;
+        color: #f04a63;
+        animation: moli-heartbeat 1.2s ease-in-out infinite;
+      }
+      @keyframes moli-heartbeat {
+        0%, 100% { transform: scale(1); }
+        15% { transform: scale(1.25); }
+        30% { transform: scale(1); }
+        45% { transform: scale(1.15); }
+      }
+      #theme-heo .moli-footer-groups {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(8rem, 10rem));
+        justify-content: center;
+        gap: 1.5rem 4rem;
+        width: 100%;
+        margin-top: 0.5rem;
+        text-align: left;
+      }
+      #theme-heo .moli-footer-group { display: grid; align-content: start; gap: 0.45rem; }
+      #theme-heo .moli-footer-group-title {
+        margin-bottom: 0.25rem;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--heo-color-text);
+      }
+      #theme-heo .moli-footer-group a {
+        justify-self: start;
+        color: var(--heo-color-text-secondary);
+        transition: color 0.2s;
+      }
+      #theme-heo .moli-footer-group a:hover { color: var(--heo-color-primary); }
+      .dark #theme-heo .moli-footer-group a:hover { color: var(--heo-color-accent); }
+      #theme-heo .moli-footer-badges {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+      }
+      #theme-heo .moli-footer-badge {
+        display: inline-flex;
+        overflow: hidden;
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        line-height: 1.6;
+        transition: transform 0.2s;
+      }
+      #theme-heo .moli-footer-badge:hover { transform: translateY(-1px); }
+      #theme-heo .moli-footer-badge span { padding: 0.1rem 0.55rem; color: #fff; }
+      #theme-heo .moli-footer-badge span:first-child { background: #4a4a52; }
+      #theme-heo .moli-footer-badge span:last-child { background: var(--heo-color-primary); }
+      .dark #theme-heo .moli-footer-badge span:last-child { background: var(--heo-color-accent); color: #111; }
+      @media (max-width: 640px) {
+        #theme-heo .moli-footer-social { gap: 1rem; }
+        #theme-heo .moli-footer-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem 1rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #theme-heo .moli-footer-runtime i { animation: none; }
+      }
+
       /* 站点图标是圆的 */
       #theme-heo .moli-logo-icon { border-radius: 50%; object-fit: cover; }
 
